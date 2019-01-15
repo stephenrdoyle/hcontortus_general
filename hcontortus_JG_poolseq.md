@@ -1,0 +1,27 @@
+# JG poolseq 04_analysis
+
+
+DNA was prepared from pools of larvae from pre and post ivermectin treated farms. DNA was prepared in two ways, first from 200 L3 , and from whole genome amplification of the 200 L3. The rationale for doing the WGA was that significantly less sample could be used from limited samples.
+
+
+
+
+
+
+
+```
+Pool ID	Additional information about sample (e.g. no. of worms)	DNA extraction protocol	QC steps used	volume (ul)	yield (ng)	concen-tration (ng/ul)
+Farm 7 pre treatment	200 larvae 3rd stage, 95% H. contortus	Phenol-chloroform	HcF7_200L_Pre_632882	10	5	0.5
+Farm 7 post treatment	200 larvae 3rd stage, 96% H. contortus	Phenol-chloroform	HcF7_200L_Post_632882	10	42	4.2
+Farm 15 pre treatment	200 larvae 3rd stage, 80% H. contortus	Phenol-chloroform		10	4.98	0.498
+Farm 15 post treatment	200 larvae 3rd stage, 100% H. contortus	Phenol-chloroform		10	0	broken tube, empty
+Farm 33 pre treatment	200 larvae 1st stage, 93% H. contortus	Phenol-chloroform	HcF33_200L_Pre_632882	10	9	0.9
+Farm 33 post treatment	200 larvae 1st stage, 96% H. contortus	Phenol-chloroform	HcF33_200L_Post_632882	10	5.34	0.534
+
+Farm 7 pre treatment	200 larvae 3rd stage, 95% H. contortus	Whole genome amplification	HcF7_200L_Pre_WGA_632882	30	4530	151
+Farm 7 post treatment	200 larvae 3rd stage, 96% H. contortus	Whole genome amplification	HcF7_200L_Post_WGA_632882	30	2748	91.6
+Farm 15 pre treatment	200 larvae 3rd stage, 80% H. contortus	Whole genome amplification	HcF15_200L_Pre_WGA_632882	30	7380	246
+Farm 15 post treatment	200 larvae 3rd stage, 100% H. contortus	Whole genome amplification	HcF15_200L_Post_WGA_632882	30	18720	624
+Farm 33 pre treatment	200 larvae 1st stage, 93% H. contortus	Whole genome amplification	HcF33_200L_Pre_WGA_632882	30	1662	55.4
+Farm 33 post treatment	200 larvae 1st stage, 96% H. contortus	Whole genome amplification	HcF33_200L_Post_WGA_632882	30	2730	91
+```
