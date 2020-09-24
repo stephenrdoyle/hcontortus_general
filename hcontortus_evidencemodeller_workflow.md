@@ -1,6 +1,7 @@
 
 ## Commands used to run EvidenceModeller for the Haemonchus genome annotation
-- basic workflow for running EvidenceModeller, a little cleaned up to remove Sanger-specfic info
+- basic workflow for running EvidenceModeller,
+- a little cleaned up to remove Sanger-specfic info, eg. we use bsub for job submission, so I have removed this, but have included the rough run time and requirements that were used. 
 - I didn't write it up as a proper workflow at the time as I was naively working through it step by step, so not very pretty, but did work ok
 - the output of this was sent back into PASA for a second round update as recommended
 - let me know if any of it is not clear, or if you get stuck
