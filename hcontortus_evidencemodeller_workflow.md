@@ -1,16 +1,28 @@
 
-# Commands used to run EvidenceModeller for the Haemonchus genome annotation
-
-
+## Commands used to run EvidenceModeller for the Haemonchus genome annotation
+- basic workflow for running EvidenceModeller, a little cleaned up to remove Sanger-specfic info
+- I didn't write it up as a proper workflow at the time as I was naively working through it step by step, so not very pretty, but did work ok
+- the output of this was sent back into PASA for a second round update as recommended
+- let me know if any of it is not clear, or if you get stuck
 
 
 ```bash
+# get the input data from ftp
+wget ftp://ngs.sanger.ac.uk/production/pathogens/sd21/hcontortus_genome/evidencemodeller_troubleshooting/*
 
-wget
+# input files:
+#--- AUGUSTUS_JN_CURATED.exonerate.renamed.gff - a set of ~110 manually curated genes
+#--- braker.renamed.gff3 - braker output
+#--- ce_2_v4.exonerate.renamed.gff3 - C.elegans proteins mapped to H. contortus genome using exonerate
+#--- exonerate.V1_2_V4.renamed.gff - H. contortus V1 proteins mapped to H. contortus genome using exonerate
+#--- HAEM_V4_final.chr.fa - genome
+#--- pasa.renamed.gff3 - output of PASA containing IsoSeq predicted models
+#--- weights.txt - differential weighting scheme for each piece of evidence
 
 
 
 # Step 1 - partition inputs
+#- ~1.5h, < 1 Gb mem
 
 EVidenceModeler-1.1.1/EvmUtils/partition_EVM_inputs.pl \
      --genome HAEM_V4_final.chr.fa \
@@ -25,6 +37,7 @@ EVidenceModeler-1.1.1/EvmUtils/partition_EVM_inputs.pl \
 
 
 # Step 2 - write commands
+#- < 1 min, < 100 Mb mem
 
 EVidenceModeler-1.1.1/EvmUtils/write_EVM_commands.pl \
      --weights weights.txt \
@@ -40,14 +53,15 @@ EVidenceModeler-1.1.1/EvmUtils/write_EVM_commands.pl \
 
 
 # Step 3 - run EVM
+#- ~ 4h, < 100 Mb mem
 
 chmod a+x commands.list
-
 ./commands.list
 
 
 
 # Step 4 - recombine partitions
+#- ~ 5 min, < 100 Mb mem
 
 EVidenceModeler-1.1.1/EvmUtils/recombine_EVM_partial_outputs.pl \
      --partitions partitions_list.out \
@@ -55,6 +69,7 @@ EVidenceModeler-1.1.1/EvmUtils/recombine_EVM_partial_outputs.pl \
 
 
 # Step 5 - make a GFF3
+#- < 1 min, < 100 Mb mem
 
 EVidenceModeler-1.1.1/EvmUtils/convert_EVM_outputs_to_GFF3.pl \
      --partitions partitions_list.out \
