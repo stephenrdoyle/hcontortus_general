@@ -45,6 +45,9 @@ cat genes.filtered.bed | cut -f4 | sort | uniq -c | wc -l
 #> 152 genes
 
 
+# run mipgen
+#--- load module to get tabix
+module load common-apps/htslib/1.9.229
 
 bsub.py 10 mipgen_test "/nfs/users/nfs_s/sd21/lustre118_link/software/AMPLICONS/MIPGEN/mipgen \
      -regions_to_scan genes.filtered.bed \
