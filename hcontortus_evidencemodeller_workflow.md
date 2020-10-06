@@ -1,7 +1,7 @@
 
 ## Commands used to run EvidenceModeller for the Haemonchus genome annotation
 - basic workflow for running EvidenceModeller,
-- a little cleaned up to remove Sanger-specfic info, eg. we use bsub for job submission, so I have removed this, but have included the rough run time and requirements that were used. 
+- a little cleaned up to remove Sanger-specfic info, eg. we use bsub for job submission, so I have removed this, but have included the rough run time and requirements that were used.
 - I didn't write it up as a proper workflow at the time as I was naively working through it step by step, so not very pretty, but did work ok
 - the output of this was sent back into PASA for a second round update as recommended
 - let me know if any of it is not clear, or if you get stuck
@@ -76,5 +76,27 @@ EVidenceModeler-1.1.1/EvmUtils/convert_EVM_outputs_to_GFF3.pl \
      --partitions partitions_list.out \
      --output evm.out \
      --genome HAEM_V4_final.chr.fa
+```
+
+
+## Reloading PASA with evidence modeller output, and iteratively reloading isoseq data as per manual
+```bash
+# step 1: load annotations
+PASApipeline-pasa-v2.2.0/scripts/Load_Current_Gene_Annotations.dbi -c alignAssembly.config -g HAEM_V4_final.chr.fa -P HC_V4_evm.gff
+
+
+# step 2: compare - note used both HQ and LQ isoseq data in reload
+PASApipeline-pasa-v2.2.0/scripts/Launch_PASA_pipeline.pl -c annotCompare.config -A -g HAEM_V4_final.chr.fa -t all_isoseq.renamed.fasta --CPU 7
+#> this produced a GFF called "sd21_pasa_HcV4_2.gene_structures_post_PASA_updates.6815.gff3"
+
+# step 3: load_pasaR1_annotations - see filename with new suffix 6815
+PASApipeline-pasa-v2.2.0/scripts/Load_Current_Gene_Annotations.dbi -c alignAssembly.config -g HAEM_V4_final.chr.fa -P sd21_pasa_HcV4_2.gene_structures_post_PASA_updates.6815.gff3
+
+
+# step 4: pasa_compare_2_reloaded_annotations
+PASApipeline-pasa-v2.2.0/scripts/Launch_PASA_pipeline.pl -c annotCompare.config -A -g HAEM_V4_final.chr.fa -t all_isoseq.renamed.fasta --CPU 7
+
+#> this produced a GFF called "sd21_pasa_HcV4_2.gene_structures_post_PASA_updates.31804.gff3" which I made some modifications (renamed gene ids etc ) / cleaned up / sorted to produce "HCON_V4.renamed.gff3".
+
 
 ```

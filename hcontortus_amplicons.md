@@ -57,4 +57,10 @@ bsub.py 10 mipgen_test "/nfs/users/nfs_s/sd21/lustre118_link/software/AMPLICONS/
      -bwa_genome_index $PWD/REF.fa \
      -snp_file XQTL_PARENTS.raw.snpeff.vcf.gz"
 
+
+
+
+# checking the number of genes 
+grep "hcon" hc_mipgene_test1.snp_mips.txt | cut -f20 | cut -c-13 | sort | uniq | wc -l
+#> 136 genes
 ```
